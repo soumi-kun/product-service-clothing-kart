@@ -1,0 +1,119 @@
+name: dockercompose3500509308079883883
+services:
+  product-microservice-diy-kart:
+    build:
+      context: C:\dev\diy-kart\product-microservice-diy-kart
+      dockerfile: product-microservice-diy-kart/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: product-microservice-diy-kart
+      target: base
+    container_name: product-microservice-diy-kart
+    entrypoint:
+      - tail
+      - -f
+      - /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      NUGET_FALLBACK_PACKAGES: ""
+    image: productmicroservicediykart:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/product-microservice-diy-kart.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 443
+        published: "4015"
+        protocol: tcp
+      - mode: ingress
+        target: 80
+        protocol: tcp
+      - mode: ingress
+        target: 443
+        protocol: tcp
+    tty: true
+    volumes:
+      - type: bind
+        source: C:\Users\soumi_kun\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\soumi_kun\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\dev\diy-kart\product-microservice-diy-kart\product-microservice-diy-kart
+        target: /app
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\dev\diy-kart\product-microservice-diy-kart
+        target: /src
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\soumi_kun\vsdbg\vs2017u5
+        target: /remote_debugger
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\soumi_kun\.nuget\packages\
+        target: /root/.nuget/packages
+        read_only: true
+        bind:
+          create_host_path: true
+  productmicroservicetest:
+    build:
+      context: C:\dev\diy-kart\product-microservice-diy-kart
+      dockerfile: ProductMicroservice.Test/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: ProductMicroservice.Test
+      target: build
+    container_name: ProductMicroservice.Test
+    entrypoint:
+      - tail
+      - -f
+      - /dev/null
+    environment:
+      NUGET_FALLBACK_PACKAGES: ""
+    image: productmicroservicetest:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/ProductMicroservice.Test.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      default: null
+    tty: true
+    volumes:
+      - type: bind
+        source: C:\dev\diy-kart\product-microservice-diy-kart\ProductMicroservice.Test
+        target: /app
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\soumi_kun\vsdbg\vs2017u5
+        target: /remote_debugger
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\soumi_kun\.nuget\packages\
+        target: /root/.nuget/packages
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose3500509308079883883_default

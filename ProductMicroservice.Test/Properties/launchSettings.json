@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ProductMicroservice.Test": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = ProductMicroservice.Test
+build_property.ProjectDir = C:\dev\diy-kart\product-service-clothing-kart\ProductMicroservice.Test\

@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  product-microservice-diy-kart:
+    image: ${DOCKER_REGISTRY-}productmicroservicediykart
+    build:
+      context: .
+      dockerfile: product-microservice-diy-kart/Dockerfile
+    ports: 
+        - "4015:443"
+
+  productmicroservicetest:
+    image: ${DOCKER_REGISTRY-}productmicroservicetest
+    build:
+      context: .
+      dockerfile: ProductMicroservice.Test/Dockerfile
+
+
